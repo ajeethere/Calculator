@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class Calculater extends AppCompatActivity {
     Button one,two,three,four,five,six,seven,eight,nine,zero,equalsBtn,clear,back,plusBtn,subBtn,multiBtn,divBtn;
-    EditText txt,txtA,txtB;
+    EditText txtA,txtB;
+    TextView txt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +28,7 @@ public class Calculater extends AppCompatActivity {
         nine=(Button) findViewById(R.id.nine);
         zero=(Button) findViewById(R.id.zero);
         equalsBtn=(Button) findViewById(R.id.equals);
-        txt=(EditText) findViewById(R.id.txt);
+        txt=(TextView) findViewById(R.id.txt);
         txtA=(EditText)findViewById(R.id.txt1);
         txtB=(EditText)findViewById(R.id.txt2);
         clear=(Button) findViewById(R.id.clr);
@@ -117,32 +121,57 @@ public class Calculater extends AppCompatActivity {
             public void onClick(View v) {
                 String b="1";
                 txtA.setText(b);
-                txtB.setText(txt.getText().toString());
-                String a="";
-                txt.setText(a);
+                solutions();
+            }
+        });
+        subBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String b="2";
+                txtA.setText(b);
+                solutions();
+            }
+        });
+        multiBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String b="3";
+                txtA.setText(b);
+                solutions();
+            }
+        });
+        divBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String b="4";
+                txtA.setText(b);
+                solutions();
             }
         });
         equalsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double a=Double.parseDouble(txtA.getText().toString());
+                double a=Double.parseDouble(txtB.getText().toString());
                 double b=Double.parseDouble(txt.getText().toString());
-                if(txtA.getText().toString().equals(1)){
+                txt.setText("");
+                String st=txtA.getText().toString();
+                if(st.equals("1")){
                     double c=a+b;
-                    txt.setText((int) c);
+                    txt.setText(Double.toString(c));
+                }else if (st.equals("2")){
+                    double c=a-b;
+                    txt.setText(Double.toString(c));
+                }else if (st.equals("3")){
+                    double c=a*b;
+                    txt.setText(Double.toString(c));
+                }else if(st.equals("4")){
+                    double c=a/b;
+                    txt.setText(Double.toString(c));
                 }
             }
         });
 
-
-
-
-        equalsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String c=txt.getText().toString();
-            }
-        });
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,5 +190,10 @@ public class Calculater extends AppCompatActivity {
             }
         });
 
+    }
+    public void solutions(){
+        txtB.setText(txt.getText().toString());
+        String a="";
+        txt.setText(a);
     }
 }
