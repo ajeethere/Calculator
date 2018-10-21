@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 public class Calculater extends AppCompatActivity {
     Button one,two,three,four,five,six,seven,eight,nine,zero,equalsBtn,clear,back,plusBtn,subBtn,multiBtn,divBtn;
-    EditText txt;
+    EditText txt,txtA,txtB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +25,8 @@ public class Calculater extends AppCompatActivity {
         zero=(Button) findViewById(R.id.zero);
         equalsBtn=(Button) findViewById(R.id.equals);
         txt=(EditText) findViewById(R.id.txt);
+        txtA=(EditText)findViewById(R.id.txt1);
+        txtB=(EditText)findViewById(R.id.txt2);
         clear=(Button) findViewById(R.id.clr);
         back=(Button) findViewById(R.id.back);
         plusBtn=(Button)findViewById(R.id.plus);
@@ -113,12 +115,24 @@ public class Calculater extends AppCompatActivity {
         plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String a=txt.getText().toString();
-                String b="";
-                txt.setText(b);
+                String b="1";
+                txtA.setText(b);
+                txtB.setText(txt.getText().toString());
+                String a="";
+                txt.setText(a);
             }
         });
-
+        equalsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double a=Double.parseDouble(txtA.getText().toString());
+                double b=Double.parseDouble(txt.getText().toString());
+                if(txtA.getText().toString().equals(1)){
+                    double c=a+b;
+                    txt.setText((int) c);
+                }
+            }
+        });
 
 
 
